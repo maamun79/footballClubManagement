@@ -23,6 +23,7 @@ class SquadController extends Controller
         $matches = Match::where('tournament_id', $tournamentId)
                         ->where('status', 'Undefined')->get();
 
+        // dd(response()->json($matches));
         return response()->json($matches);
     }
 }

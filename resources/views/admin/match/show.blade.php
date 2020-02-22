@@ -71,6 +71,7 @@
                                 <div style="margin-top: 80px;">
                                     <div class="col-md-4">
                                         <span style="font-size: 2em; font-weight: 300;">
+                                             <!-- showing match scores -->
                                             @if($matchStat->isEmpty())
                                                 -
                                             @else
@@ -83,6 +84,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <span style="font-size: 2em; font-weight: 300;">
+                                            <!-- showing opposite team scores -->
                                             @if($matchStat->isEmpty())
                                                 -
                                             @else
@@ -124,6 +126,7 @@
                                 <div style="margin-top: 80px;">
                                     <div class="col-md-4">
                                         <span style="font-size: 2em; font-weight: 300;">
+                                            <!-- showing opposite team scores for away match -->
                                             @if($matchStat->isEmpty())
                                                 -
                                             @else
@@ -136,6 +139,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <span style="font-size: 2em; font-weight: 300;">
+                                            <!-- showing scores for away match -->
                                             @if($matchStat->isEmpty())
                                                 -
                                             @else

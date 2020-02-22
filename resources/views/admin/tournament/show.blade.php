@@ -48,11 +48,13 @@
                 </div>
                 <table class="table table-bordered" id="fixture-table-body">
                     <tbody>
+                        <!-- showing match list -->
                         @foreach($matches as $match)
                             <tr>
                                 <td>
                                     <div class="col-md-6">
                                         <small>Match Day : {{$match->match_day}} ({{$match->match_type}})</small><br>
+                                        <!-- showing home match and away match differently -->
                                         @if($match->match_type == "Home")
                                             <img class="club-logo" src="{{ asset('admin/image/club-logo/fcb.png') }}" alt="">
                                             <span>Barcelona </span><strong>vs</strong>
@@ -70,6 +72,7 @@
                                         <span>{{$match->starting_time}}</span>
                                     </div>
                                     <div class="col-md-2">
+                                        <!-- showing match scores for defined matches -->
                                         @if($match->status == "Defined")
                                             @if($match->match_type == "Home")
                                                 @foreach($matchStats as $matchStat)
@@ -85,6 +88,7 @@
                                                 @endforeach
                                             @endif
 
+                                            <!-- showing match result based on scores -->
                                             @foreach($matchStats as $matchStat)
                                                 @if($match->id == $matchStat->match_id)
                                                     @if($matchStat->goal > $matchStat->goal_consided)
@@ -96,6 +100,7 @@
                                                     @endif
                                                 @endif
                                             @endforeach
+                                        <!-- showing message for those matches are not defined -->
                                         @elseif($match->status == "Undefined")
                                             <p class="text-danger text-center">Not defined yet</p>
                                         @endif

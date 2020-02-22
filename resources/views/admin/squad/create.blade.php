@@ -49,6 +49,7 @@
                                 @enderror -->
                                 <select class="form-control m-bot15" id="tournament" name="tournament">
                                     <option value="">Select Tournament</option>
+                                    <!-- fetch tournaments for declaring squad -->
                                     @foreach($tournaments as $tournament)
                                         <option value="{{$tournament->id}}">{{$tournament->name}} ({{$tournament->season}})</option>
                                     @endforeach
@@ -60,6 +61,7 @@
                                 <!-- @error('tournament')
                                     <span style="color:red;">{{ $message }}</span>
                                 @enderror -->
+                                <!-- showing undefined match based on tournaments through ajax -->
                                 <select class="form-control m-bot15" id="match" name="match">
                                     <option value="">Select Match</option>
                                 </select>
@@ -70,6 +72,7 @@
 
                                 <div class="col-md-9">
                                     <select name="country" class="multi-select" multiple="" id="my_multi_select3">
+                                        <!-- fatching players based on their playing positions -->
                                         @foreach($positions as $position)
                                             <optgroup label="{{$position->position}}">
                                                 @foreach($players as $player)
@@ -90,6 +93,7 @@
     </form>
 
 <script>
+    // ajax for selecting match autometically
     $('#tournament').on('change', function(e){
         console.log(e);
 

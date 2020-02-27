@@ -11,7 +11,7 @@ class SquadController extends Controller
 {
     public function create(){
         $tournaments = Tournament::all();
-        $players = Player::all();
+        $players = Player::where('status', 'available')->get();
         $positions = Player::select('position')
                             ->groupBy('position')
                             ->get();

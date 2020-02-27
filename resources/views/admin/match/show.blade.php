@@ -184,9 +184,77 @@
                         <div class="tab-content">
                             <!-- -------lineups--------- -->
                             <div class="tab-pane active" id="lineups">
-                                <div>
+                                <div class="full-field">
                                     <!-- -----------lineup pitch----------- -->
+                                    <div class="side-top">
+                                        <div class="goal-bar1">
                                     
+                                        </div>
+                                        <!-- left mid -->
+                                        <div class="lineups lm">
+
+                                        </div>
+                                        <!-- center mid -->
+                                        <div class="lineups cm">
+
+                                        </div>
+                                        <!-- right mid -->
+                                        <div class="lineups rm">
+
+                                        </div>
+                                        <!-- left forward -->
+                                        <div class="lineups lf">
+
+                                        </div>
+                                        <!-- center forward -->
+                                        <div class="lineups cf">
+
+                                        </div>
+                                        <!-- right forward -->
+                                        <div class="lineups rf">
+
+                                        </div>
+                                    </div>
+                                    <div class="middle-circle">
+
+                                    </div>
+
+                                    <div class="side-bottom">
+                                        <!-- left back -->
+                                        <div class="lineups lb">
+
+                                        </div>
+                                        <!-- center back 1 -->
+                                        <div class="lineups cb1">
+
+                                        </div>
+                                        <!-- center back 2 -->
+                                        <div class="lineups cb2">
+
+                                        </div>
+                                        <!-- Right back -->
+                                        <div class="lineups rb">
+
+                                        </div>
+                                        <div class="goal-bar2">
+                                            <!-- goal keeper -->
+                                            <div class="lineups gk">
+                                                <div class="card-div">
+                                                     <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                </div>                    
+                                                
+                                                <div>
+                                                    <span class="jersy_no">10</span>
+                                                </div>
+                                                <div class="score-ball-div">
+                                                    <img src="{{asset('admin/image/logo/football.png')}}" class="score-ball" alt="">
+                                                </div>
+                                                <div>
+                                                    <p style="color: #fff">Stegan</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- -----------/lineup pitch----------- -->
                                 </div>
                             </div>

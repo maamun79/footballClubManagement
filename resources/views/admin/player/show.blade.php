@@ -28,7 +28,12 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel widget-info-twt blue-box" id="player-button">
-                    <h5>{{ $player->first_name }} {{ $player->last_name }}</h5>
+                    <h5>
+                        {{ $player->first_name }} {{ $player->last_name }}
+                        @if($player->status == "injured")
+                            <img src="{{asset('admin/image/logo/injured.png')}}" style="height: 20px; width: 20px;" alt="">    
+                        @endif
+                    </h5>
                     <span class="subtitle">{{ $player->position }}</span>
 
                     <div class="avatar"><img alt="" src="{{asset('/')}}admin/image/player/{{$player->image}}"></div>
@@ -54,9 +59,15 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fa fa-plus-square"></i> Mark as injured
-                            </a>
+                            @if($player->status == "injured")
+                                <a href="/players/{{$player->id}}/recovered">
+                                    <i class="fa fa-check-square"></i> Recovered
+                                </a>
+                            @else
+                                <a href="/players/{{$player->id}}/injured">
+                                    <i class="fa fa-plus-square"></i> Mark as injured
+                                </a>
+                            @endif
                         </li>
                         <li>
                             <a href="#">

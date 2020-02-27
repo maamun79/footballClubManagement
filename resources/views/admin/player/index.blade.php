@@ -36,35 +36,20 @@
                             <div class="stepy-tab">
                             </div>
                             <form id="default" class="form-horizontal">
-                                <fieldset title="Current Players">
-                                    <legend>Current Players</legend>
+                                <fieldset title="Available Players">
+                                    <legend>Available Players</legend>
 <!-- ======================================start Current player Data table=================================== -->
                                     @include('admin.partials.currentPlayer')
 <!-- ======================================End Current player Data table===================================== -->
                                 </fieldset>
-                                <fieldset title="Contact Info">
-                                    <legend>Contact Details</legend>
-                                    <div class="form-group">
-                                        <label class="col-md-2 col-sm-2 control-label">Phone</label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <input type="text" placeholder="Phone" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-2 col-sm-2 control-label">Mobile</label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <input type="text" placeholder="Mobile" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-2 col-sm-2 control-label">Address</label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <textarea rows="5" cols="60" class="form-control"></textarea>
-                                        </div>
-                                    </div>
+                                <fieldset title="Injured Players">
+                                    <legend>Injured Players</legend>
+<!-- ======================================start Injured player Data table=================================== -->
+                                    @include('admin.partials.injuredPlayer')
+<!-- ======================================End Injured player Data table===================================== -->
                                 </fieldset>
                                 <button class="btn btn-info finish" style="display:none">
-                                    </button>
+                                </button>
                             </form>
                         </div>
                     </div>

@@ -5826,3 +5826,139 @@ a:focus {
     margin-top: -8px;
     padding-bottom: 1px;
 }
+ /* football field */
+
+ .full-field {
+     width: 100%;
+     height: 700px;
+     background-color: #0F9D58;
+ }
+ 
+ .side-top{
+    width: 100%;
+    height: 349px;
+    /* background-color: rebeccapurple; */
+    border-bottom: 1px solid #57BA8A;
+ }
+ .goal-bar1{
+    width: 33%;
+    height: 80px;
+    /* background-color: orange; */
+    margin-left: 33%;
+    border-style: solid;
+    border-width: 0 1px 1px 1px;
+    border-color: #57BA8A;
+ }
+
+ .middle-circle{
+    width: 30%;
+    height: 30%;
+    /* background-color: red; */
+    border-radius: 50%;
+    border: 1px solid #57BA8A;
+    margin-left: 35%;
+    margin-top: -108px;
+ }
+
+ .side-bottom {
+     width: 100%;
+     height: 250px;
+     /* background-color: teal; */
+     padding-top: 170px;
+ }
+
+ .goal-bar2{
+    width: 33%;
+    height: 80px;
+    /* background-color: orange; */
+    margin-left: 33%;
+    border-style: solid;
+    border-width: 1px 1px 0 1px;
+    border-color: #57BA8A;
+    position: relative;
+    bottom: 161px;
+ }
+
+ .lineups {
+     height: 40px;
+     width: 40px;
+     border-radius: 50%;
+     background-color: #ED433A;
+     border: 2px solid white;
+ }
+ .gk {
+     margin-left: 45%;
+     margin-top: -45px;
+ }
+ .lb {
+    position: relative;
+    left: 40px;
+    top: -190px;
+ }
+ .cb1 {
+     position: relative;
+     left: 238px;
+     top: -230px;
+ }
+ .cb2 {
+     position: relative;
+     top: -270px;
+     left: 406px;
+ }
+ .rb {
+     position: relative;
+     top: -310px;
+     left: 610px;
+ }
+ .lm {
+     position: relative;
+     left: 122px;
+     top: 180px;
+ }
+ .cm {
+     position: relative;
+     left: 317px;
+     top: 140px;
+ }
+ .rm {
+     position: relative;
+     left: 510px;
+     top: 100px;
+ }
+ .lf {
+    position: relative;
+    left: 122px;
+    top: -95px;
+ }
+ .cf {
+    position: relative;
+    left: 311px;
+    top: -135px;
+ }
+ .rf {
+    position: relative;
+    top: -175px;
+    left: 508px;
+ }
+
+ .jersy_no{
+    display: inline-block;
+    padding: 9px;
+    color: #fff;
+ }
+
+ .card-div {
+     margin-top: -30px;
+ }
+ .card {
+     height: 30px;
+     width: 30px;
+ }
+ .score-ball-div {
+     margin-left: -15px;
+     margin-top: -22px;
+ }
+ .score-ball {
+     height: 15px;
+     width: 15px;
+ }

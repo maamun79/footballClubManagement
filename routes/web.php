@@ -19,6 +19,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // --------------------player controller----------------------
 Route::resource('players','PlayerController');
+Route::get('/players/{playerId}/injured', 'PlayerController@injuredCreate');
+Route::post('/players/{playerId}/injured', 'PlayerController@injuredStore');
+Route::get('/players/{playerId}/recovered', 'PlayerController@recoveryUpdate');
 
 // ------------------------Tournament controller------------------
 Route::resource('tournaments', 'TournamentController');

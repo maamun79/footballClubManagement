@@ -2,9 +2,8 @@
     <div class="col-sm-12">
         <section class="panel">
             <header class="panel-heading">
-                Available Players
+                Injured Players
                 <span class="tools pull-right">
-                <a href="/players/create" id="add_player_btn" class="btn btn-info " type="button"><i class="fa fa-refresh"></i> Add Player</a>
                     <a href="javascript:;" class="fa fa-chevron-down"></a>
                 </span>
             </header>
@@ -21,17 +20,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($players as $player)
+                            @foreach($injuredPlayers as $injuredPlayer)
                             <tr class="gradeA">
-                                <td>{{ $player->first_name}}</td>
-                                <td>{{ $player->last_name}}</td>
-                                <td>{{ $player->country}}</td>
-                                <td>{{ $player->contract_end_date }}</td>
+                                <td>{{ $injuredPlayer->first_name}}</td>
+                                <td>{{ $injuredPlayer->last_name}}</td>
+                                <td>{{ $injuredPlayer->country}}</td>
+                                <td>{{ $injuredPlayer->contract_end_date }}</td>
                                 <td>
-                                    <a href="players/{{$player->id}}" class="btn btn-success btn-sm" style="float:left;margin-right:2px"><i class="fa fa-eye"></i></a>
+                                    <a href="players/{{$injuredPlayer->id}}" class="btn btn-success btn-sm" style="float:left;margin-right:2px"><i class="fa fa-eye"></i></a>
                                     <!-- <button type="submit" class="btn btn-danger btn-sm deleteBtn"><i class="fa fa-archive"></i></button>
                                     -->
-                                     <a href="players/{{$player->id}}" class="btn btn-danger btn-sm deleteBtn"><i class="fa fa-archive"></i></a>
+                                     <a href="players/{{$injuredPlayer->id}}" class="btn btn-danger btn-sm deleteBtn"><i class="fa fa-archive"></i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -51,6 +50,7 @@
         </section>
     </div>
 </div>
+
 <script>
     $('.deleteBtn').click(function (event) {
         event.preventDefault();
@@ -96,4 +96,3 @@
         })
     });
 </script>
-

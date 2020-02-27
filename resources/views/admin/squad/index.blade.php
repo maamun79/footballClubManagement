@@ -77,3 +77,7 @@
     </div>
 </div>
 @endsection
+
+<!-- @section('script')
+    <script src="{{ asset('admin/squad.js')}}"></script>
+@endsection -->

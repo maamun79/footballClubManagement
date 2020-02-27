@@ -87,20 +87,20 @@ class MatchController extends Controller
         ]);
 
         $matchStat = new MatchStat();
-        $matchStat->match_id      = $matchId;
-        $matchStat->shots         = $request->shots;
-        $matchStat->shots_on_target      = $request->shots_on_target;
-        $matchStat->possession         = $request->possession;
-        $matchStat->passes      = $request->passes;
-        $matchStat->pass_accuracy      = $request->pass_accuracy;
-        $matchStat->foul_commited         = $request->foul_commited;
-        $matchStat->foul_conside          = $request->foul_conside;
-        $matchStat->yellow_cards          = $request->yellow_cards;
-        $matchStat->red_cards          = $request->red_cards;
-        $matchStat->offsides          = $request->offsides;
-        $matchStat->corners          = $request->corners;
-        $matchStat->goal          = $request->goal;
-        $matchStat->goal_consided          = $request->goal_consided;
+        $matchStat->match_id        = $matchId;
+        $matchStat->shots           = $request->shots;
+        $matchStat->shots_on_target = $request->shots_on_target;
+        $matchStat->possession      = $request->possession;
+        $matchStat->passes          = $request->passes;
+        $matchStat->pass_accuracy   = $request->pass_accuracy;
+        $matchStat->foul_commited   = $request->foul_commited;
+        $matchStat->foul_conside    = $request->foul_conside;
+        $matchStat->yellow_cards    = $request->yellow_cards;
+        $matchStat->red_cards       = $request->red_cards;
+        $matchStat->offsides        = $request->offsides;
+        $matchStat->corners         = $request->corners;
+        $matchStat->goal            = $request->goal;
+        $matchStat->goal_consided   = $request->goal_consided;
 
         $matchStat->save();
 

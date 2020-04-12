@@ -25,6 +25,7 @@ class CreateMatchesTable extends Migration
             $table->integer('match_day');
             $table->string('opposite_team_logo');
             $table->string('status')->default('Undefined');
+            $table->string('squad_status')->default('Undefined');
             $table->timestamps();
             
             $table->foreign('tournament_id')

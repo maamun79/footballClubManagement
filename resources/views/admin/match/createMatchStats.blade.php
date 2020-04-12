@@ -27,7 +27,7 @@
 <hr/>
 
 <div class="wrapper">
-    <form action="/tournaments/{{$tournament->id}}/matches/{{$match->id}}/matchStats" method="post" enctype="multipart/form-data">
+    <form action="/tournaments/{{$tournament->id}}/matches/{{$match->id}}/matchStats" name="matchStat" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-10 col col-md-offset-1">
@@ -182,5 +182,13 @@
         </div>
     </form>
 </div>
+
+<script>
+  var x = document.forms["matchStat"]["goal"].value;
+  if (x > 0) {
+    alert("Name must be filled out");
+    return false;
+  }
+</script>
       
 @endsection

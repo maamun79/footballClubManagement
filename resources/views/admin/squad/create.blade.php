@@ -31,7 +31,8 @@
 <hr/>
 <!-- ----------jquery steps------------- -->
 <div class="wrapper">
-    <form id="example-advanced-form" action="#">
+    <form action="/squads" method="post" enctype="multipart/form-data">
+        @csrf
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel">
@@ -57,12 +58,12 @@
                             </div>
 
                             <div class="col-md-12 form-group">
-                                <label for="match">Select Match<span style="color:red">*</span></label>
-                                <!-- @error('tournament')
+                                <label for="match_id">Select Match<span style="color:red">*</span></label>
+                                <!-- @error('match_id')
                                     <span style="color:red;">{{ $message }}</span>
                                 @enderror -->
                                 <!-- showing undefined match based on tournaments through ajax -->
-                                <select class="form-control m-bot15" id="match" name="match">
+                                <select class="form-control m-bot15" id="match_id" name="match_id">
                                     <option value="">Select Match</option>
                                 </select>
                             </div>
@@ -71,7 +72,7 @@
                                 <label class="control-label col-md-3">Select Player</label>
 
                                 <div class="col-md-9">
-                                    <select name="country" class="multi-select" multiple="" id="my_multi_select3">
+                                    <select name="player_id[]" class="multi-select" multiple="" id="my_multi_select3">
                                         <!-- fatching players based on their playing positions -->
                                         @foreach($positions as $position)
                                             <optgroup label="{{$position->position}}">
@@ -85,6 +86,11 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="col-md-4 form-group pull-right">
+                                 <input type="submit" class="btn btn-success pull-right btn-block" id="addPlayerBtn">
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -100,10 +106,10 @@
         let tournament_id = e.target.value;
         
         $.get('/ajax-match/' + tournament_id, function(data){
-            $('#match').empty();
+            $('#match_id').empty();
 
             $.each(data, function(index, tMatch){
-                $('#match').append('<option value="'+tMatch.id+'">'+'VS '+tMatch.opposite_team+' (Match Day : '+tMatch.match_day+' - '+tMatch.match_type+' Match)'+'</option>');
+                $('#match_id').append('<option value="'+tMatch.id+'">'+'VS '+tMatch.opposite_team+' (Match Day : '+tMatch.match_day+' - '+tMatch.match_type+' Match)'+'</option>');
             });
         });
     });

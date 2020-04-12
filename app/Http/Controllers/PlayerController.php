@@ -149,16 +149,8 @@ class PlayerController extends Controller
 
 
     }
-    
-    // ======================Temporary======================
 
-    public function squad(){
-        $players = Player::all();
-
-        return view('admin.squad.index', compact('players'));
-    }
-
-        // ================Validation Rules===================
+    // ================Validation Rules===================
     public function validateData(Request $request){
         $validatedData = $request->validate([
             'first_name'          => 'required',

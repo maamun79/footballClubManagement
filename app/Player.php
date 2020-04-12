@@ -11,4 +11,12 @@ class Player extends Model
     public function injuredPlayers(){
         return $this->hasMany('App\InjuredPlayer');
     }
+
+    public function playerSquad(){
+        return $this->hasMany('App\PlayerSquad');
+    }
+
+    public function playerStats(){
+        return $thid->hasMany('App\PlayerStat');
+    }
 }

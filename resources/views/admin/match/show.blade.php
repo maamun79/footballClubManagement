@@ -4,6 +4,10 @@
 <title>Match Details</title>
 @endsection
 
+@section('style')
+    <script src="{{asset('admin/steps/jquery.steps.js')}}"></script>
+@endsection
+
 @section('content')
 <!-- page heading start-->
 <div class="page-heading">
@@ -24,18 +28,18 @@
                 </ul>
             </div>
 
-            @if($matchStat->isEmpty())
-                <div class="col-md-6">
+            <div class="col-md-6">
+                @if($matchStat->isEmpty())
                     <a href="/tournaments/{{$tournament->id}}/matches/{{$match->id}}/matchStats/create" class="btn btn-success pull-right" style="margin-top: 16px">Add Stats</a>
-                </div>
-            @endif
+                @endif
+            </div>
         </div>
     </div>
-    <!-- @if(session()->has('message'))
+    @if(session()->has('message'))
         <div class="alert alert-success">
             {{ session()->get('message') }}
         </div>
-    @endif -->
+    @endif
 
 </div>
 <hr>
@@ -184,79 +188,498 @@
                         <div class="tab-content">
                             <!-- -------lineups--------- -->
                             <div class="tab-pane active" id="lineups">
+                              @if($squads->isEmpty())
+                                <span>Not Published Yet</span>
+                              @else
                                 <div class="full-field">
                                     <!-- -----------lineup pitch----------- -->
                                     <div class="side-top">
                                         <div class="goal-bar1">
                                     
                                         </div>
-                                        <!-- left mid -->
-                                        <div class="lineups lm">
+                                        @foreach($squads as $squad)
+                                            <!-- left mid -->
+                                            @if($squad->position == "Left Mid")
+                                                <div class="lineups lm">
+                                                    <!-- ------------card------------ -->
+                                                    <div class="">
+                                                        @foreach($stats as $stat)
+                                                            @if($squad->player_id == $stat->player_id && $stat->red_card > 0 && $stat->yellow_card == 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card == 0)
+                                                                <img src="{{asset('admin/image/logo/yellow-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card > 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                    <!-- ------------/card------------ -->
+                                                    <a href="#" class="" data-toggle="modal" data-target="#exampleModal{{$squad->player_id}}">
+                                                        <div>
+                                                            <span class="jersy_no">{{$squad->jersy_no}}</span>
+                                                        </div>
+                                                    <!-- -----------------scorrer------------------ -->
+                                                        <div class="">
+                                                            @foreach($stats as $stat)
+                                                                @if($squad->player_id == $stat->player_id && $stat->goals > 0)
+                                                                    <img src="{{asset('admin/image/logo/football.png')}}" class="score-ball" alt="">
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                        <!-- -----------------/scorrer------------------ -->
+                                                        <div>
+                                                            <p style="color: #fff">{{$squad->last_name}}</p>
+                                                        </div>
+                                                    </a>
+                                                    @foreach($stats as $stat)
+                                                        @if($squad->player_id == $stat->player_id)
+                                                            <p class="rating-front">{{$stat->rating}}</p>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        @endforeach
 
-                                        </div>
-                                        <!-- center mid -->
-                                        <div class="lineups cm">
+                                        @foreach($squads as $squad)
+                                            <!-- center mid -->
+                                            @if($squad->position == "Center Mid")
+                                                <div class="lineups cm">
+                                                    <!-- ------------card------------ -->
+                                                    <div class="">
+                                                        @foreach($stats as $stat)
+                                                            @if($squad->player_id == $stat->player_id && $stat->red_card > 0 && $stat->yellow_card == 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card == 0)
+                                                                <img src="{{asset('admin/image/logo/yellow-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card > 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                    <!-- ------------/card------------ -->
+                                                    <a href="#" class="" data-toggle="modal" data-target="#exampleModal{{$squad->player_id}}">
+                                                        <div>
+                                                            <span class="jersy_no">{{$squad->jersy_no}}</span>
+                                                        </div>
+                                                    <!-- -----------------scorrer------------------ -->
+                                                        <div class="">
+                                                            @foreach($stats as $stat)
+                                                                @if($squad->player_id == $stat->player_id && $stat->goals > 0)
+                                                                    <img src="{{asset('admin/image/logo/football.png')}}" class="score-ball" alt="">
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                        <!-- -----------------/scorrer------------------ -->
+                                                        <div>
+                                                            <p style="color: #fff">{{$squad->last_name}}</p>
+                                                        </div>
+                                                    </a>
+                                                    @foreach($stats as $stat)
+                                                        @if($squad->player_id == $stat->player_id)
+                                                            <p class="rating-front">{{$stat->rating}}</p> 
+                                                        @endif   
+                                                    @endforeach                                   
+                                                </div>
+                                            @endif
+                                        @endforeach
 
-                                        </div>
-                                        <!-- right mid -->
-                                        <div class="lineups rm">
+                                        @foreach($squads as $squad)
+                                            <!-- right mid -->
+                                            @if($squad->position == "Right Mid")
+                                                <div class="lineups rm">
+                                                    <!-- ------------card------------ -->
+                                                    <div class="">
+                                                        @foreach($stats as $stat)
+                                                            @if($squad->player_id == $stat->player_id && $stat->red_card > 0 && $stat->yellow_card == 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card == 0)
+                                                                <img src="{{asset('admin/image/logo/yellow-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card > 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                    <!-- ------------/card------------ -->
+                                                    <a href="#" class="" data-toggle="modal" data-target="#exampleModal{{$squad->player_id}}">
+                                                        <div>
+                                                            <span class="jersy_no">{{$squad->jersy_no}}</span>
+                                                        </div>
+                                                    <!-- -----------------scorrer------------------ -->
+                                                        <div class="">
+                                                            @foreach($stats as $stat)
+                                                                @if($squad->player_id == $stat->player_id && $stat->goals > 0)
+                                                                    <img src="{{asset('admin/image/logo/football.png')}}" class="score-ball" alt="">
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                        <!-- -----------------/scorrer------------------ -->
+                                                        <div>
+                                                            <p style="color: #fff">{{$squad->last_name}}</p>
+                                                        </div>
+                                                    </a>
+                                                    @foreach($stats as $stat)
+                                                        @if($squad->player_id == $stat->player_id)
+                                                            <p class="rating-front">{{$stat->rating}}</p>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        @endforeach
 
-                                        </div>
+                                        @foreach($squads as $squad)
                                         <!-- left forward -->
-                                        <div class="lineups lf">
+                                            @if($squad->position == "Left Forward")
+                                                <div class="lineups lf">
+                                                    <!-- ------------card------------ -->
+                                                    <div class="">
+                                                        @foreach($stats as $stat)
+                                                            @if($squad->player_id == $stat->player_id && $stat->red_card > 0 && $stat->yellow_card == 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card == 0)
+                                                                <img src="{{asset('admin/image/logo/yellow-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card > 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                    <!-- ------------/card------------ -->
+                                                    <a href="#" class="" data-toggle="modal" data-target="#exampleModal{{$squad->player_id}}">
+                                                        <div>
+                                                            <span class="jersy_no">{{$squad->jersy_no}}</span>
+                                                        </div>
+                                                    <!-- -----------------scorrer------------------ -->
+                                                        <div class="">
+                                                            @foreach($stats as $stat)
+                                                                @if($squad->player_id == $stat->player_id && $stat->goals > 0)
+                                                                    <img src="{{asset('admin/image/logo/football.png')}}" class="score-ball" alt="">
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                        <!-- -----------------/scorrer------------------ -->
+                                                        <div>
+                                                            <p style="color: #fff">{{$squad->last_name}}</p>
+                                                        </div>
+                                                    </a>
+                                                    @foreach($stats as $stat)
+                                                        @if($squad->player_id == $stat->player_id)
+                                                            <p class="rating-front">{{$stat->rating}}</p>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        @endforeach
 
-                                        </div>
+                                        @foreach($squads as $squad)
                                         <!-- center forward -->
-                                        <div class="lineups cf">
+                                            @if($squad->position == "Center Forward")
+                                                <div class="lineups cf">
+                                                    <!-- ------------card------------ -->
+                                                    <div class="">
+                                                        @foreach($stats as $stat)
+                                                            @if($squad->player_id == $stat->player_id && $stat->red_card > 0 && $stat->yellow_card == 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card == 0)
+                                                                <img src="{{asset('admin/image/logo/yellow-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card > 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                    <!-- ------------/card------------ -->
+                                                    <a href="#" class="" data-toggle="modal" data-target="#exampleModal{{$squad->player_id}}">
+                                                        <div>
+                                                            <span class="jersy_no">{{$squad->jersy_no}}</span>
+                                                        </div>
+                                                    <!-- -----------------scorrer------------------ -->
+                                                        <div class="">
+                                                            @foreach($stats as $stat)
+                                                                @if($squad->player_id == $stat->player_id && $stat->goals > 0)
+                                                                    <img src="{{asset('admin/image/logo/football.png')}}" class="score-ball" alt="">
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                        <!-- -----------------/scorrer------------------ -->
+                                                        <div>
+                                                            <p style="color: #fff">{{$squad->last_name}}</p>
+                                                        </div>
+                                                    </a>
+                                                    @foreach($stats as $stat)
+                                                        @if($squad->player_id == $stat->player_id)
+                                                            <p class="rating-front">{{$stat->rating}}</p>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        @endforeach
 
-                                        </div>
-                                        <!-- right forward -->
-                                        <div class="lineups rf">
-
-                                        </div>
+                                        @foreach($squads as $squad)
+                                            <!-- right forward -->
+                                            @if($squad->position == "Right Forward")
+                                                <div class="lineups rf">
+                                                    <!-- ------------card------------ -->
+                                                    <div class="">
+                                                        @foreach($stats as $stat)
+                                                            @if($squad->player_id == $stat->player_id && $stat->red_card > 0 && $stat->yellow_card == 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card == 0)
+                                                                <img src="{{asset('admin/image/logo/yellow-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card > 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                    <!-- ------------/card------------ -->
+                                                    <a href="#" class="" data-toggle="modal" data-target="#exampleModal{{$squad->player_id}}">
+                                                        <div>
+                                                            <span class="jersy_no">{{$squad->jersy_no}}</span>
+                                                        </div>
+                                                    <!-- -----------------scorrer------------------ -->
+                                                        <div class="">
+                                                            @foreach($stats as $stat)
+                                                                @if($squad->player_id == $stat->player_id && $stat->goals > 0)
+                                                                    <img src="{{asset('admin/image/logo/football.png')}}" class="score-ball" alt="">
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                        <!-- -----------------/scorrer------------------ -->
+                                                        <div>
+                                                            <p style="color: #fff">{{$squad->last_name}}</p>
+                                                        </div>
+                                                    </a>
+                                                    @foreach($stats as $stat)
+                                                        @if($squad->player_id == $stat->player_id)
+                                                            <p class="rating-front">{{$stat->rating}}</p>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        @endforeach
                                     </div>
                                     <div class="middle-circle">
 
                                     </div>
 
                                     <div class="side-bottom">
-                                        <!-- left back -->
-                                        <div class="lineups lb">
+                                        @foreach($squads as $squad)
+                                            <!-- left back -->
+                                            @if($squad->position == "Left Back")
+                                                <div class="lineups lb">
+                                                    <!-- ------------card------------ -->
+                                                    <div class="">
+                                                        @foreach($stats as $stat)
+                                                            @if($squad->player_id == $stat->player_id && $stat->red_card > 0 && $stat->yellow_card == 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card == 0)
+                                                                <img src="{{asset('admin/image/logo/yellow-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card > 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                    <!-- ------------/card------------ -->
+                                                    <a href="#" class="" data-toggle="modal" data-target="#exampleModal{{$squad->player_id}}">
+                                                        <div>
+                                                            <span class="jersy_no">{{$squad->jersy_no}}</span>
+                                                        </div>
+                                                    <!-- -----------------scorrer------------------ -->
+                                                        <div class="">
+                                                            @foreach($stats as $stat)
+                                                                @if($squad->player_id == $stat->player_id && $stat->goals > 0)
+                                                                    <img src="{{asset('admin/image/logo/football.png')}}" class="score-ball" alt="">
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                        <!-- -----------------/scorrer------------------ -->
+                                                        <div>
+                                                            <p style="color: #fff">{{$squad->last_name}}</p>
+                                                        </div>
+                                                    </a>
+                                                    @foreach($stats as $stat)
+                                                        @if($squad->player_id == $stat->player_id)
+                                                            <p class="rating-front">{{$stat->rating}}</p>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        @endforeach
 
-                                        </div>
-                                        <!-- center back 1 -->
-                                        <div class="lineups cb1">
+                                        @foreach($squads as $squad)
+                                            <!-- center back 1 -->
+                                            @if($squad->position == "Center Back L")
+                                                <div class="lineups cb1">
+                                                    <!-- ------------card------------ -->
+                                                    <div class="">
+                                                        @foreach($stats as $stat)
+                                                            @if($squad->player_id == $stat->player_id && $stat->red_card > 0 && $stat->yellow_card == 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card == 0)
+                                                                <img src="{{asset('admin/image/logo/yellow-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card > 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                    <!-- ------------/card------------ -->
+                                                    <a href="#" class="" data-toggle="modal" data-target="#exampleModal{{$squad->player_id}}">
+                                                        <div>
+                                                            <span class="jersy_no">{{$squad->jersy_no}}</span>
+                                                        </div>
+                                                    <!-- -----------------scorrer------------------ -->
+                                                        <div class="">
+                                                            @foreach($stats as $stat)
+                                                                @if($squad->player_id == $stat->player_id && $stat->goals > 0)
+                                                                    <img src="{{asset('admin/image/logo/football.png')}}" class="score-ball" alt="">
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                        <!-- -----------------/scorrer------------------ -->
+                                                        <div>
+                                                            <p style="color: #fff">{{$squad->last_name}}</p>
+                                                        </div>
+                                                    </a>
+                                                    @foreach($stats as $stat)
+                                                        @if($squad->player_id == $stat->player_id)
+                                                            <p class="rating-front">{{$stat->rating}}</p>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        @endforeach
 
-                                        </div>
-                                        <!-- center back 2 -->
-                                        <div class="lineups cb2">
+                                        @foreach($squads as $squad)
+                                            <!-- center back 2 -->
+                                            @if($squad->position == "Center Back R")
+                                                <div class="lineups cb2">
+                                                    <!-- ------------card------------ -->
+                                                    <div class="">
+                                                        @foreach($stats as $stat)
+                                                            @if($squad->player_id == $stat->player_id && $stat->red_card > 0 && $stat->yellow_card == 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card == 0)
+                                                                <img src="{{asset('admin/image/logo/yellow-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card > 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                    <!-- ------------/card------------ -->
+                                                    <a href="#" class="" data-toggle="modal" data-target="#exampleModal{{$squad->player_id}}">
+                                                        <div>
+                                                            <span class="jersy_no">{{$squad->jersy_no}}</span>
+                                                        </div>
+                                                    <!-- -----------------scorrer------------------ -->
+                                                        <div class="">
+                                                            @foreach($stats as $stat)
+                                                                @if($squad->player_id == $stat->player_id && $stat->goals > 0)
+                                                                    <img src="{{asset('admin/image/logo/football.png')}}" class="score-ball" alt="">
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                        <!-- -----------------/scorrer------------------ -->
+                                                        <div>
+                                                            <p style="color: #fff">{{$squad->last_name}}</p>
+                                                        </div>
+                                                    </a>
+                                                    @foreach($stats as $stat)
+                                                        @if($squad->player_id == $stat->player_id)
+                                                            <p class="rating-front">{{$stat->rating}}</p>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        @endforeach
 
-                                        </div>
-                                        <!-- Right back -->
-                                        <div class="lineups rb">
+                                        @foreach($squads as $squad)
+                                                <!-- Right back -->
+                                            @if($squad->position == "Right Back")
+                                                <div class="lineups rb">
+                                                    <!-- ------------card------------ -->
+                                                    <div class="">
+                                                        @foreach($stats as $stat)
+                                                            @if($squad->player_id == $stat->player_id && $stat->red_card > 0 && $stat->yellow_card == 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card == 0)
+                                                                <img src="{{asset('admin/image/logo/yellow-card.png')}}" class="card" alt="">
+                                                            @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card > 0)
+                                                                <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                    <!-- ------------/card------------ -->
+                                                    <a href="#" class="" data-toggle="modal" data-target="#exampleModal{{$squad->player_id}}">
+                                                        <div>
+                                                            <span class="jersy_no">{{$squad->jersy_no}}</span>
+                                                        </div>
+                                                        <!-- -----------------scorrer------------------ -->
+                                                            <div class="">
+                                                                @foreach($stats as $stat)
+                                                                    @if($squad->player_id == $stat->player_id && $stat->goals > 0)
+                                                                        <img src="{{asset('admin/image/logo/football.png')}}" class="score-ball" alt="">
+                                                                    @endif
+                                                                @endforeach
+                                                            </div>
+                                                            <!-- -----------------/scorrer------------------ -->
+                                                        <div>
+                                                            <p style="color: #fff">{{$squad->last_name}}</p>
+                                                        </div>
+                                                    </a>
+                                                    @foreach($stats as $stat)
+                                                        @if($squad->player_id == $stat->player_id)
+                                                            <p class="rating-front">{{$stat->rating}}</p>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        @endforeach
 
-                                        </div>
                                         <div class="goal-bar2">
-                                            <!-- goal keeper -->
-                                            <div class="lineups gk">
-                                                <div class="card-div">
-                                                     <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
-                                                </div>                    
-                                                
-                                                <div>
-                                                    <span class="jersy_no">10</span>
-                                                </div>
-                                                <div class="score-ball-div">
-                                                    <img src="{{asset('admin/image/logo/football.png')}}" class="score-ball" alt="">
-                                                </div>
-                                                <div>
-                                                    <p style="color: #fff">Stegan</p>
-                                                </div>
-                                            </div>
+                                            @foreach($squads as $squad)
+                                                <!-- goal keeper -->
+                                                @if($squad->position == "Goal Keeper")
+                                                    <div class="lineups gk">
+                                                        <!-- ------------card------------ -->
+                                                        <div class="">
+                                                            @foreach($stats as $stat)
+                                                                @if($squad->player_id == $stat->player_id && $stat->red_card > 0 && $stat->yellow_card == 0)
+                                                                    <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                                @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card == 0)
+                                                                    <img src="{{asset('admin/image/logo/yellow-card.png')}}" class="card" alt="">
+                                                                @elseif($squad->player_id == $stat->player_id && $stat->yellow_card > 0 && $stat->red_card > 0)
+                                                                    <img src="{{asset('admin/image/logo/red-card.png')}}" class="card" alt="">
+                                                                @endif
+                                                            @endforeach
+                                                        </div>
+                                                        <!-- ------------/card------------ -->
+                                                        <a href="#" class="" data-toggle="modal" data-target="#exampleModal{{$squad->player_id}}">
+                                                            <div>
+                                                                <span class="jersy_no">{{$squad->jersy_no}}</span>
+                                                            </div>
+                                                            <!-- -----------------scorrer------------------ -->
+                                                            <div class="">
+                                                                @foreach($stats as $stat)
+                                                                    @if($squad->player_id == $stat->player_id && $stat->goals > 0)
+                                                                        <img src="{{asset('admin/image/logo/football.png')}}" class="score-ball" alt="">
+                                                                    @endif
+                                                                @endforeach
+                                                            </div>
+                                                            <!-- -----------------/scorrer------------------ -->
+                                                            <div>
+                                                                <p style="color: #fff">{{$squad->last_name}}</p>
+                                                            </div>
+                                                        </a>
+                                                        @foreach($stats as $stat)
+                                                            @if($squad->player_id == $stat->player_id)
+                                                                <p class="rating-front">{{$stat->rating}}</p>
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                @endif
+                                            @endforeach
                                         </div>
                                     </div>
                                     <!-- -----------/lineup pitch----------- -->
                                 </div>
+                                @endif
                             </div>
                             <!-- ----------stats---------- -->
                             <div class="tab-pane " id="stats">
@@ -295,14 +718,73 @@
                                             <p>{{$matchStat[0]->goal_consided}}</p>
                                         </div>
                                     </div>
-                                
-                                    
                                 @endif
                             </div>
                         </div>
                     </div>
                 </section>
                 <!-- ---------------tabs--------------- -->
+
+                <!-- Modal -->
+                @foreach($squads as $squad)
+                    <div class="modal fade" id="exampleModal{{$squad->player_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        @if($squad->stat_status == "Undefined")
+                            <form action="/tournaments/{{$tournament->id}}/matches/{{$match->id}}/squads/{{$squad->squad_id}}/playerStats/{{$squad->player_id}}" name="matchStat" method="post" enctype="multipart/form-data">
+                            @csrf
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" style="float:left" id="exampleModalLabel">{{$squad->first_name}} {{$squad->last_name}}</h4>
+                                            <img class="squad-photo" src="{{asset('/')}}admin/image/player/{{$squad->image}}" alt="">
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="square-widget">
+                                                    <div class="widget-container">                                         
+                        <!-- =================================== Create Player Stats Modal ========================== -->
+                                            @include('admin.match.inc.createPlayerStats')
+                        <!-- =================================== /Create Player Stats Modal ========================== -->
+                                                    </div>
+                                                </div>     
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <input type="submit" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        @else
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content stat-modal">
+                                    <div class="modal-header custom-modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="square-widget">
+                                                <div class="widget-container">                                            
+                                    <!-- =================================== show Player Stats Modal ========================== -->
+                                                        @include('admin.match.inc.showPlayerStats')
+                                    <!-- =================================== /show Player Stats Modal ========================== -->                                                           
+                                                </div>
+                                            </div>     
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>

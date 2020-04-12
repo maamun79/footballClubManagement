@@ -19,4 +19,8 @@ class Match extends Model
     public function squad(){
         return $this->hasOne('App\Squad');
     }
+
+    public function playerStats(){
+        return $thid->hasMany('App\PlayerStat');
+    }
 }

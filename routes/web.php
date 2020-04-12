@@ -34,9 +34,15 @@ Route::get('/tournaments/{tournamentId}/matches/{matchId}', 'MatchController@sho
 Route::get('/tournaments/{tournamentId}/matches/{matchId}/matchStats/create', 'MatchController@createMatchStats'); 
 //matchStats post
 Route::post('/tournaments/{tournamentId}/matches/{matchId}/matchStats', 'MatchController@storeMatchStats'); 
-
+//playerStats post
+Route::post('/tournaments/{tournamentId}/matches/{matchId}/squads/{squadId}/playerStats/{playerId}', 'MatchController@storePlayerStats'); 
+//match Calendar
+Route::get('/match_schedual', 'MatchController@calendar');
 // ----------------------------Squad Controller----------------------------
+Route::get('/squads', 'SquadController@index');
 Route::get('/squad/create', 'SquadController@create');
 Route::get('/ajax-match/{tournamentId}', 'SquadController@matchView');
-// ================temporary==================
-Route::get('/squad', 'PlayerController@squad');
+Route::post('/squads', 'SquadController@store');
+
+// --------------------------jquery Squad test------------------------------
+Route::get('test_squad', 'SquadController@test');

@@ -182,15 +182,15 @@
                                 <select class="form-control m-bot15" id="position" name="position">
                                     <option value="{{$player->position}}">{{$player->position}}</option>
                                     <option value="Goal Keeper">Goal Keeper</option>
-                                    <option value="Centre Back">Centre Back</option>
-                                    <option value="Full Back">Full Back</option>
-                                    <option value="Right Back">Right Back</option>
                                     <option value="Left Back">Left Back</option>
-                                    <option value="Central Midfielder">Central Midfielder</option>
-                                    <option value="Right Midfielder">Right Midfielder</option>
+                                    <option value="Center Back L">Center Back L</option>
+                                    <option value="Center Back R">Center Back R</option>
+                                    <option value="Left Mid">Left Mid</option>
+                                    <option value="Center Mid">Center Mid</option>
+                                    <option value="Right Mid">Right Mid</option>
                                     <option value="Left Forward">Left Forward</option>
+                                    <option value="Center Forward">Center Forward</option>
                                     <option value="Right Forward">Right Forward</option>
-                                    <option value="Central Forward">Central Forward</option>
                                 </select>
                             </div>
 

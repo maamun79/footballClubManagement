@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Match;
 use App\Tournament;
 use App\MatchStat;
+use App\Player;
+use App\Squad;
+use App\PlayerSquad;
+use App\PlayerStat;
 
 class MatchController extends Controller
 {    
@@ -56,13 +60,23 @@ class MatchController extends Controller
         $tournament = Tournament::findOrFail($tournamentId);
         $match = Match::findOrFail($matchId);
         $matchStat = MatchStat::where('match_id', $matchId)->get();
+
+        $squads = Squad::where('match_id', $matchId)
+                        ->join('player_squads', 'squads.id', '=', 'player_squads.squad_id')
+                        ->join('players', 'players.id', '=', 'player_squads.player_id')->get();
+        
+        $stats = PlayerStat::where('match_id', $matchId)->get();
+
+
+        // dd($squads[1]->first_name);
         // $matchStat = MatchStat::findOrFail($matchId);
         // dd($matchStat);
 
-        return view('admin.match.show', compact('match', 'tournament', 'matchStat'));
+        return view('admin.match.show', compact('match', 'tournament', 'matchStat', 'squads', 'stats'));
     }
 
     public function createMatchStats($tournamentId, $matchId){
+
         $tournament = Tournament::findOrFail($tournamentId);
         $match = Match::findOrFail($matchId);
         
@@ -112,4 +126,64 @@ class MatchController extends Controller
         return redirect('/tournaments/'.$tournamentId.'/matches/'.$matchId)->with('message', 'Match added successfully');
         
     }
+
+    // schedule calendar
+    public function calendar(){
+        $matchCalendars = Match::all();
+        // $tournaments = Tournament::join('matches', 'tournaments.id', '=', 'matches.tournament_id')->get();
+                                // dd($tournaments);
+        $tournaments = Tournament::all();
+
+        return view('admin.match.matchCalendar', compact('matchCalendars', 'tournaments'));
+    }
+
+    //store player stats
+    public function storePlayerStats(Request $request, $tournamentId, $matchId, $squadId, $playerId){
+        
+        $playerStat = new PlayerStat();
+        $playerStat->player_id            = $playerId;
+        $playerStat->match_id             = $matchId;
+        $playerStat->rating               = $request->rating;
+        $playerStat->time_played          = $request->time_played;
+        $playerStat->goals                = $request->goals;
+        $playerStat->assist               = $request->assist;
+        $playerStat->yellow_card          = $request->yellow_card;
+        $playerStat->red_card             = $request->red_card;
+        $playerStat->shots                = $request->shots;
+        $playerStat->shots_on_target      = $request->shots_on_target;
+        $playerStat->shots_off_target     = $request->shots_off_target;
+        $playerStat->dribbles_attempted   = $request->dribbles_attempted;
+        $playerStat->dribbles_won         = $request->dribbles_won;
+        $playerStat->offsides             = $request->offsides;
+        $playerStat->fouled               = $request->fouled;
+        $playerStat->total_passes         = $request->total_passes;
+        $playerStat->accurate_passes      = $request->accurate_passes;
+        $playerStat->pass_accuracy        = $request->pass_accuracy;
+        $playerStat->key_passes           = $request->key_passes;
+        $playerStat->through_balls        = $request->through_balls;
+        $playerStat->crosses              = $request->crosses;
+        $playerStat->long_balls           = $request->long_balls;
+        $playerStat->aerials              = $request->aerials;
+        $playerStat->aerials_won          = $request->aerials_won;
+        $playerStat->tackles_attempted    = $request->tackles_attempted;
+        $playerStat->successfull_tackles  = $request->successfull_tackles;
+        $playerStat->clearances           = $request->clearances;
+        $playerStat->interceptions        = $request->interceptions;
+        $playerStat->foules               = $request->foules;
+        $playerStat->dispossessed         = $request->dispossessed;
+        $playerStat->dribbled_past        = $request->dribbled_past;
+
+        $playerStat->save();
+
+        $playerSquad = PlayerSquad::where('player_id', $playerId)
+                                    ->where('squad_id', $squadId)->first();
+        $playerSquad->stat_status = 'Defined';
+
+        $playerSquad->save();
+
+    
+        return redirect('/tournaments/'.$tournamentId.'/matches/'.$matchId)->with('message', 'Player Stats added successfully');
+        
+    }
+
 }

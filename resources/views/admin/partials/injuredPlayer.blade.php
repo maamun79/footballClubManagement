@@ -12,9 +12,10 @@
                     <table  class="display table table-bordered table-striped" id="dynamic-table">
                         <thead>
                             <tr>
+                                <th>Jersy No.</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
-                                <th>Nationality</th>
+                                <th>Position</th>
                                 <th>Contract Ends</th>
                                 <th>Actions</th>
                             </tr>
@@ -22,9 +23,10 @@
                         <tbody>
                             @foreach($injuredPlayers as $injuredPlayer)
                             <tr class="gradeA">
+                                <td>{{ $injuredPlayer->jersy_no}}</td>
                                 <td>{{ $injuredPlayer->first_name}}</td>
                                 <td>{{ $injuredPlayer->last_name}}</td>
-                                <td>{{ $injuredPlayer->country}}</td>
+                                <td>{{ $injuredPlayer->position}}</td>
                                 <td>{{ $injuredPlayer->contract_end_date }}</td>
                                 <td>
                                     <a href="players/{{$injuredPlayer->id}}" class="btn btn-success btn-sm" style="float:left;margin-right:2px"><i class="fa fa-eye"></i></a>
@@ -37,9 +39,10 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <th>Jersy No.</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
-                                <th>Nationality</th>
+                                <th>Position</th>
                                 <th>Contract Ends</th>
                                 <th>Actions</th>
                             </tr>

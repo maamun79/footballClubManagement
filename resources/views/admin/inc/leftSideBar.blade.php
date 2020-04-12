@@ -42,7 +42,13 @@
             <a href="/players"><i class="fa fa-home"></i> <span>Players</span></a>            
         </li>
         <li class="">
-            <a href="/squad"><i class="fa fa-home"></i> <span>Squad</span></a>            
+            <a href="/squads"><i class="fa fa-home"></i> <span>Squad</span></a>            
+        </li>
+        <li class="">
+            <a href="/test_squad"><i class="fa fa-home"></i> <span>Test</span></a>            
+        </li>
+        <li class="">
+            <a href="/match_schedual"><i class="fa fa-home"></i> <span>Match Calendar</span></a>            
         </li>
     </ul>
     <!--sidebar nav end-->

@@ -11,4 +11,8 @@ class Squad extends Model
     public function match(){
         return $this->belongsTo('App\Match');
     }
+
+    public function playerSquad(){
+        return $this->belongsTo('App\PlayerSquad');
+    }
 }

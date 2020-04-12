@@ -15,7 +15,12 @@ class CreateSquadsTable extends Migration
     {
         Schema::create('squads', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('match_id');
             $table->timestamps();
+
+            $table->foreign('match_id')
+                  ->references('id')->on('matches')
+                  ->onDelete('cascade');
         });
     }
 
